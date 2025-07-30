@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from "react";
 
+<<<<<<< HEAD
 function QuestionForm({ onAddForm }) {
+=======
+function QuestionForm({ onAddQuestion }) {
+>>>>>>> 9788d1c8a376e6ddddd5580ab46e6d7f86b49d0f
   const [formData, setFormData] = useState({
     prompt: "",
     answer1: "",
@@ -10,22 +14,39 @@ function QuestionForm({ onAddForm }) {
     correctIndex: 0,
   });
 
-  function handleChange(event) {
+  function handleChange(e) {
     setFormData({
       ...formData,
-      [event.target.name]: event.target.value,
+      [e.target.name]: e.target.value,
     });
   }
 
+<<<<<<< HEAD
   function handleSubmit(event) {
     event.preventDefault();
     console.log(formData);
+=======
+  function handleSubmit(e) {
+    e.preventDefault();
+
+    const newQuestion = {
+      prompt: formData.prompt,
+      answers: [
+        formData.answer1,
+        formData.answer2,
+        formData.answer3,
+        formData.answer4,
+      ],
+      correctIndex: parseInt(formData.correctIndex),
+    };
+>>>>>>> 9788d1c8a376e6ddddd5580ab46e6d7f86b49d0f
 
     fetch("http://localhost:4000/questions", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
+<<<<<<< HEAD
       body: JSON.stringify({
         prompt: formData.prompt,
         answers: [
@@ -40,6 +61,13 @@ function QuestionForm({ onAddForm }) {
       .then((response) => response.json())
       .then((newQuestion) => {
         onAddForm(newQuestion);
+=======
+      body: JSON.stringify(newQuestion),
+    })
+      .then((r) => r.json())
+      .then((savedQuestion) => {
+        onAddQuestion(savedQuestion);
+>>>>>>> 9788d1c8a376e6ddddd5580ab46e6d7f86b49d0f
         setFormData({
           prompt: "",
           answer1: "",
@@ -120,3 +148,4 @@ function QuestionForm({ onAddForm }) {
 }
 
 export default QuestionForm;
+
